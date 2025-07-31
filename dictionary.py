@@ -64,8 +64,28 @@ nested_dict = {
 
 
 
-for key, value in nested_dict.items():
-    for nested_key, nested_value in value.items():
-        print(f"{key}, {value} - данные первого словаря")
-        print(f"{nested_key}, {nested_value} - данные вложенного словаря")
+# for key, value in nested_dict.items():
+#     for nested_key, nested_value in value.items():
+#         print(f"{key}, {value} - данные первого словаря")
+#         print(f"{nested_key}, {nested_value} - данные вложенного словаря")
 
+
+
+# for id, data_dict in marvel_dict.items():
+#     for key, value in data_dict.items():
+#         print(id, key, value)
+
+search_q = 2008
+
+result_dict = {}
+result_list = []
+
+for id, data_dict in marvel_dict.items():
+    if search_q == data_dict['year']:
+        data_dict_copy = data_dict.copy()
+        result_dict[id] = data_dict
+        result_list.append(data_dict)
+
+pprint(result_list)
+print('-'*88)
+pprint(result_dict)
