@@ -36,7 +36,7 @@ def response_pc_last_letter(input_user: str,set_cities: set) -> str:
     """
     global word_pc
     for i in set_cities:
-        if i[0:1] == input_user[-1:]:
+        if i[0] == input_user[-1]:
             word_pc = i
             print(f'Ответ ПК: {word_pc}')
             collections_cities.remove(i)
@@ -53,7 +53,7 @@ def response_pc_second_to_last_letter(input_user: str,set_cities: set) -> str:
     """
     global word_pc
     for i in set_cities:
-        if i[0:1].lower() == input_user[-2:-1].lower():  #and i[-1] == 'ь'
+        if i[0].lower() == input_user[-2].lower():  #and i[-1] == 'ь'
             word_pc = i
             print(f'Ответ ПК: {word_pc}')
             collections_cities.remove(i)
@@ -88,7 +88,7 @@ def is_replace_second_to_last_user(input_user: str, replace_list: list[str]) -> 
     :return: Функция должна вернуть результат вхождения предпоследней буквы слова пользователя
     в список запрещенных букв
     """
-    return input_user[-2:-1] in replace_list
+    return input_user[-2] in replace_list
 
 
 def is_replace_second_to_last_pc(output_pc: str, replace_list: list[str]) -> bool:
@@ -98,7 +98,7 @@ def is_replace_second_to_last_pc(output_pc: str, replace_list: list[str]) -> boo
     :return: Функция должна вернуть результат вхождения предпоследней буквы слова ПК
     в список запрещенных букв
     """
-    return output_pc[-2:-1] in replace_list
+    return output_pc[-2] in replace_list
 
 
 def replace_second_to_last_letter_pc(output_pc: str) -> str:
@@ -107,10 +107,10 @@ def replace_second_to_last_letter_pc(output_pc: str) -> str:
     :return: Функция должна вернуть замену на другую букву , если предпоследняя буква слова,
     введенного ПК, входит в список букв под замену
     """
-    if output_pc[-2:-1].lower() == 'ё':
-        output_pc = output_pc[-2:-1].replace('ё', 'е')
-    elif output_pc[-2:-1].lower() == 'й':
-        output_pc = output_pc[-2:-1].replace('й', 'и')
+    if output_pc[-2].lower() == 'ё':
+        output_pc = output_pc[:-2] + output_pc[-2].replace('ё', 'е') + output_pc[-1]
+    elif output_pc[-2].lower() == 'й':
+        output_pc = output_pc[:-2] + output_pc[-2].replace('й', 'и') + output_pc[-1]
     return output_pc
 def replace_second_to_last_letter_user(input_user: str) -> str:
     """
@@ -118,10 +118,10 @@ def replace_second_to_last_letter_user(input_user: str) -> str:
     :return: Функция должна вернуть замену на другую букву, если предпоследняя буква слова,
     введенного пользователем, входит в список букв под замену
     """
-    if input_user[-2:-1].lower() == 'ё':
-        input_user[-2:-1].replace('ё', 'е')
-    elif input_user[-2:-1].lower() == 'й':
-        input_user[-2:-1].replace('й', 'и')
+    if input_user[-2].lower() == 'ё':
+        input_user[-2].replace('ё', 'е')
+    elif input_user[-2].lower() == 'й':
+        input_user[-2].replace('й', 'и')
     return input_user
 
 def is_check_last_letter(input_user: str, output_pc: str) -> bool:
@@ -130,7 +130,7 @@ def is_check_last_letter(input_user: str, output_pc: str) -> bool:
     :param output_pc: - ответ пк
     :return: Функция проверяет правильно ли пользователь ответил на последнюю букву слова ПК
     """
-    return input_user[0:1] == output_pc[-1:]
+    return input_user[0] == output_pc[-1:]
 
 def is_check_second_to_last_letter(input_user: str, output_pc: str) -> bool:
     """
@@ -138,7 +138,7 @@ def is_check_second_to_last_letter(input_user: str, output_pc: str) -> bool:
     :param output_pc: - ответ пк
     :return: Функция проверяет правильно ли пользователь ответил на предпоследнюю букву слова ПК
     """
-    return input_user[0:1] == output_pc[-2:-1]
+    return input_user[0] == output_pc[-2]
 
 
 def main():
@@ -164,12 +164,10 @@ def main():
                         if not is_check_second_to_last_letter(input_user,word_pc):
                             print('Неправильный ответ')
                             break
-
                     else:
                         if not is_check_second_to_last_letter(input_user, word_pc):
                             print('Неправильный ответ')
                             break
-
                 else:
                     if not is_check_last_letter(input_user, word_pc):
                         print('Неправильный ответ')
