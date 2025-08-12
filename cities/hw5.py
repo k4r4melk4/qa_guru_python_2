@@ -4,7 +4,7 @@ from pprint import pprint
 collections_cities = {city['name'].lower() for city in cities}
 result_list = []
 count_iteration = 0
-list_error_letter = ["ь", "ъ"]
+list_error_letter = ["ь", "ъ", "ц","ы","ё", "й"]
 list_replace_letter = ["ё", "й"]
 word_pc = ''
 
@@ -39,6 +39,7 @@ def response_pc_last_letter(input_user: str,set_cities: set) -> str:
         if i[0:1] == input_user[-1:]:
             word_pc = i
             print(f'Ответ ПК: {word_pc}')
+            collections_cities.remove(i)
             break
     return word_pc
 
@@ -52,9 +53,10 @@ def response_pc_second_to_last_letter(input_user: str,set_cities: set) -> str:
     """
     global word_pc
     for i in set_cities:
-        if i[0:1].lower() == input_user[-2:-1].lower():
+        if i[0:1].lower() == input_user[-2:-1].lower():  #and i[-1] == 'ь'
             word_pc = i
             print(f'Ответ ПК: {word_pc}')
+            collections_cities.remove(i)
             break
     return word_pc
 
@@ -66,7 +68,7 @@ def is_last_letter_user_in_error_list(input_user: str, error_list: list[str]) ->
     :return: Функция должна вернуть результат вхождения последней буквы слова пользователя
     в список запрещенных букв
     """
-    return input_user[-1:] in error_list
+    return input_user[-1] in error_list
 
 
 def is_last_letter_pc_in_error_list(output_pc: str, error_list: list[str]) -> bool:
@@ -76,7 +78,7 @@ def is_last_letter_pc_in_error_list(output_pc: str, error_list: list[str]) -> bo
     :return: Функция должна вернуть результат вхождения последней буквы слова ПК
     в список запрещенных букв
     """
-    return output_pc[-1:] in error_list
+    return output_pc[-1] in error_list
 
 
 def is_replace_second_to_last_user(input_user: str, replace_list: list[str]) -> bool:
@@ -124,11 +126,11 @@ def replace_second_to_last_letter_user(input_user: str) -> str:
 
 def is_check_last_letter(input_user: str, output_pc: str) -> bool:
     """
-    :param input_user: -  ввод пользователя
+    :param input_user: - вод пользователя
     :param output_pc: - ответ пк
     :return: Функция проверяет правильно ли пользователь ответил на последнюю букву слова ПК
     """
-    return input_user[1:2] == output_pc[-1:]
+    return input_user[0:1] == output_pc[-1:]
 
 def is_check_second_to_last_letter(input_user: str, output_pc: str) -> bool:
     """
@@ -136,7 +138,7 @@ def is_check_second_to_last_letter(input_user: str, output_pc: str) -> bool:
     :param output_pc: - ответ пк
     :return: Функция проверяет правильно ли пользователь ответил на предпоследнюю букву слова ПК
     """
-    return input_user[1:2] == output_pc[-2:-1]
+    return input_user[0:1] == output_pc[-2:-1]
 
 
 def main():
@@ -159,21 +161,17 @@ def main():
                         # замена предпоследней буквы на аналог
                         word_pc = replace_second_to_last_letter_pc(word_pc)
                         # проверка правильно ли пользователь ответил на слово ПК
-                        if is_check_second_to_last_letter(input_user,word_pc):
-                            continue
-                        else:
+                        if not is_check_second_to_last_letter(input_user,word_pc):
                             print('Неправильный ответ')
                             break
+
                     else:
-                        if is_check_second_to_last_letter(input_user, word_pc):
-                            continue
-                        else:
+                        if not is_check_second_to_last_letter(input_user, word_pc):
                             print('Неправильный ответ')
                             break
+
                 else:
-                    if is_check_last_letter(input_user, word_pc):
-                        continue
-                    else:
+                    if not is_check_last_letter(input_user, word_pc):
                         print('Неправильный ответ')
                         break
 
@@ -194,6 +192,8 @@ def main():
             print('Такого слова нет в списке городов')
             break
 
-    count_iteration += 1
+        count_iteration += 1
+    # list_of_remaining_cities = sorted(list(collections_cities))
+    # print(list_of_remaining_cities)
 
 main()
