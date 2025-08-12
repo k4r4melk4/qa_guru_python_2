@@ -119,9 +119,9 @@ def replace_second_to_last_letter_user(input_user: str) -> str:
     введенного пользователем, входит в список букв под замену
     """
     if input_user[-2].lower() == 'ё':
-        input_user[-2].replace('ё', 'е')
+        input_user = input_user[:-2] + input_user[-2].replace('ё', 'е') + input_user[-1]
     elif input_user[-2].lower() == 'й':
-        input_user[-2].replace('й', 'и')
+        input_user = input_user[:-2] + input_user[-2].replace('ё', 'е') + input_user[-1]
     return input_user
 
 def is_check_last_letter(input_user: str, output_pc: str) -> bool:
