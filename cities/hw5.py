@@ -196,4 +196,5 @@ def main():
     # list_of_remaining_cities = sorted(list(collections_cities))
     # print(list_of_remaining_cities)
 
+
 main()
