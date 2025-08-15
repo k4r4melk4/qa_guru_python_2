@@ -1,5 +1,5 @@
 from pprint import pprint
-from marvel import full_dict as marvel_dict
+from lesson_9.marvel import full_dict as marvel_dict
 
 
 

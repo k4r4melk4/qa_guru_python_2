@@ -1,4 +1,4 @@
-from marvel import small_dict, full_dict
+from lesson_9.marvel import full_dict
 from pprint import pprint
 # names = ['Eve', 'Mallory', 'Oliver', 'Emily', 'Eve', 'Mallory', 'Oliver']
 #

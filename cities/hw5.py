@@ -1,5 +1,5 @@
 from cities import cities
-from pprint import pprint
+
 
 collections_cities = {city['name'].lower() for city in cities}
 result_list = []
