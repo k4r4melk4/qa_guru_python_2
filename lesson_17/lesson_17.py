@@ -27,12 +27,12 @@
 # toaster.show_toast('Привет мир!')
 
 
-from plyer import notification
-
-notification.notify(
-    title = 'Привет Мир!',
-    message = 'Это пример уведомления на python!',
-    timeout = 5,
-    app_name = 'Приложение_1',
-    app_icon = "./ico_1.ico"
-)
+# from plyer import notification
+#
+# notification.notify(
+#     title = 'Привет Мир!',
+#     message = 'Это пример уведомления на python!',
+#     timeout = 5,
+#     app_name = 'Приложение_1',
+#     app_icon = "./ico_1.ico"
+# )
